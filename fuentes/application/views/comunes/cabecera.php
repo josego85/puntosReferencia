@@ -36,11 +36,4 @@
 
 <!-- Versión compilada y comprimida del JavaScript de Bootstrap -->
 <script src="<?php echo base_url(); ?>assets/css/Libs/Bootstrap/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" charset="utf-8">
-    // Iniciar.
-    var accion = 'listar';
-
-    window.onload = localizame(accion);
-</script>
 <!-- Fin de cabecera -->

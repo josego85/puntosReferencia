@@ -87,7 +87,7 @@ class Puntos extends CI_Controller {
         );
 
         if($this->puntos->insertar_punto($v_datos)){
-            echo "Inserto correctamente.";
+             $this->load->view("inicio");
         }else{
              echo "No inserto correctamente.";
         }

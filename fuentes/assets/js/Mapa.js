@@ -41,49 +41,54 @@ function Mapa(p_tipo, p_coordenadas, p_zoom) {
         autoType: false,
         minLength: 2
     }).on('search_locationfound', function (e) {
-        updateLatLng(e.latlng.lat,e.latlng.lng, true);
+        updateLatLng(e.latlng.lat, e.latlng.lng, true);
     }));
     
     // Marcador por defecto.
-    var marcador = L.marker([p_coordenadas['latitud'], p_coordenadas['longitud']], {
+    if(p_tipo === 'agregar'){
+        var marcador = L.marker([p_coordenadas['latitud'], p_coordenadas['longitud']], {
         draggable: 'true'
-    }).addTo(mapa);
+        }).addTo(mapa);
+        
+        // Funcion para mover el marcador.
+        function onMapClick(e) {
+    //        marcador.on('dragend', function(event){
+    //            var marker = event.target;
+    //            var position = marker.getLatLng();
+    //            marcador.setLatLng(new L.LatLng(position.lat, position.lng),{
+    //                draggable: 'true'
+    //            });
+    //            mapa.panTo(new L.LatLng(position.lat, position.lng));
+    //
+    //            // Actualizar latitud y longitud en el formulario.
+    //            updateLatLng(marcador.getLatLng().lat, marcador.getLatLng().lng);
+    //        });
+    //        mapa.addLayer(marcador);
+        };
 
-    // Funcion para mover el marcador.
-    function onMapClick(e) {
-        marcador.on('dragend', function(event){
-            var marker = event.target;
-            var position = marker.getLatLng();
-            marcador.setLatLng(new L.LatLng(position.lat, position.lng),{
-                draggable: 'true'
-            });
-            mapa.panTo(new L.LatLng(position.lat, position.lng));
+        function updateLatLng(lat, lng, reverse) {
+            if(reverse) {
+                marcador.setLatLng([lat, lng]);
+                //mapa.panTo([lat, lng]);
+            }else{
+                 // Cuando se agrega un punto.
+                 if(document.getElementById('punto_latitud') != undefined){
+                     document.getElementById('punto_latitud').value = marcador.getLatLng().lat;
+                     document.getElementById('punto_longitud').value = marcador.getLatLng().lng;
+                     //mapa.panTo([lat, lng]);
+                 } 
+            }
+        }
 
-            // Actualizar latitud y longitud en el formulario.
+        // Se registran eventos.
+        mapa.on('click', onMapClick);
+        marcador.on('dragend', function (e) {
             updateLatLng(marcador.getLatLng().lat, marcador.getLatLng().lng);
         });
-        mapa.addLayer(marcador);
-    };
 
-    function updateLatLng(lat, lng, reverse) {
-        if(reverse) {
-            marcador.setLatLng([lat, lng]);
-            mapa.panTo([lat, lng]);
-        }else{
-//             document.getElementById('latitud').value = marcador.getLatLng().lat;
-//             document.getElementById('longitud').value = marcador.getLatLng().lng;
-             //mapa.panTo([lat, lng]);
-        }
+        // Actualizar latitud y longitud en el formulario.
+        updateLatLng(p_coordenadas['latitud'], p_coordenadas['longitud']);
     }
-
-    // Se registran eventos.
-    mapa.on('click', onMapClick);
-    marcador.on('dragend', function (e) {
-        updateLatLng(marcador.getLatLng().lat, marcador.getLatLng().lng);
-    });
-
-    // Actualizar latitud y longitud en el formulario.
-    updateLatLng(p_coordenadas['latitud'], p_coordenadas['longitud']);
     
     // Humanitarian Style.
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {

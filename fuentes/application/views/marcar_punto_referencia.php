@@ -5,6 +5,13 @@
     
     <!-- Cabecera -->
     <?php $this->load->view('comunes/cabecera')?>
+    
+    <script type="text/javascript" charset="utf-8">
+        // Iniciar.
+        var accion = 'agregar';
+
+        window.onload = localizame(accion);
+    </script>
 </head>
 <body>
     <div class="container cabecera">
@@ -30,43 +37,27 @@
 
                 <input class="form-control" type="text" placeholder="Descripci&oacute;n del punto de referencia" name="punto_descripcion" value="" id="punto_descripcion" size="25" />
             </div>
+            
             <div class="form-group">
-                <label>Latitud
-                    <span>*</span>
-                </label>
-                <input class="form-control" type="text" name="punto_latitud" id="punto_latitud" value="" placeholder="click en el mapa"/>
+                <div class="col-md-10 col-md-offset-1">
+                    <input id="punto_latitud" name="punto_latitud" type="hidden" placeholder="Latitud" class="form-control">
+                </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <input id="punto_longitud" name="punto_longitud" type="hidden" placeholder="Longitud" class="form-control">
+                </div>
             </div>
+            <!-- form-group -->
+            
             <div class="form-group">
-                <label>Longitud
-                    <span>*</span>
-                </label>
-                <input class="form-control" type="text" name="punto_longitud" id="punto_longitud" value="" placeholder="click en el mapa"/>
+                <div class="panel-body text-center">
+                    <div id="mapa" class="text-align:center mapa">
+                    </div>
+                </div>
             </div>
-            <input class="btn btn-primary" type="submit" name="submit" value="Enviar" />
+            <!-- form-group -->
+            
+            <input class="btn btn-primary" type="submit" name="submit" value="Agregar" />
        </form>
-    </div>
-    
-    <div>
-        <!-- Element: Map -->
-        <div class='col col-50'>
-          <div id='map'></div>
-          <div class='left'>
-            <a id='geojsonLayer' href='#'></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-        <form role="form" >
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="Ingresa aqui tu busqueda" name="direccion" value="" id="direccion" size="25" />
-            </div>
-            <button class="btn btn-default" type="button" onclick="direccion_buscador();">Buscador</button>
-            <div id="resultado"/>
-        </form>
-    </div>
-    <div id="mapa">
     </div>
 </body>
 </html>

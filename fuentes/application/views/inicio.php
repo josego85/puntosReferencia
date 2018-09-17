@@ -5,6 +5,13 @@
     
     <!-- Cabecera -->
     <?php $this->load->view('comunes/cabecera')?>
+    
+    <script type="text/javascript" charset="utf-8">
+        // Iniciar.
+        var accion = 'listar';
+
+        window.onload = localizame(accion);
+    </script>
 </head>
 <body>
     <div class="container cabecera">

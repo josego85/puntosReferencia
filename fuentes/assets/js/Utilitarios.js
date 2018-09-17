@@ -7,19 +7,19 @@ var accion = null;
  * @returns void
  */
 function localizame(p_accion){
-	accion = p_accion;
-	
-	/**
-	 * OBS:
-	 * - Iceweasel 27.0.1 en Debian Wheezy NO funciona la GeoLocalizacion del html5.
-	 * - Mozilla Firefox en Windows si funciona la GeoLocaclizacion del html5.
-	 */
-	if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(obtenerCoordenadas, errores, {
-                enableHighAccuracy: true, 
-                maximumAge: 30000, 
-                timeout: 27000
-            });
+    accion = p_accion;
+
+    /**
+     * OBS:
+     * - Iceweasel 27.0.1 en Debian Wheezy NO funciona la GeoLocalizacion del html5.
+     * - Mozilla Firefox en Windows si funciona la GeoLocaclizacion del html5.
+     */
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(obtenerCoordenadas, errores, {
+            enableHighAccuracy: true, 
+            maximumAge: 30000, 
+            timeout: 27000
+        });
     }else{
     	 // La latitud y longitud usa los valores por defecto que se definieron en las
     	 // variables globales.
@@ -75,16 +75,16 @@ function errores(error){
  * @returns void
  */ 
 function posicionPorDefecto(){
-	//Asuncion - Paraguay.
-	var v_latitud = -25.2961407;
-	var v_longitud = -57.6309129;
-	
-	// Se crea un array con latitud y longitud.
-	var v_coordenadas = new Array();
-	v_coordenadas['latitud'] = v_latitud;
-	v_coordenadas['longitud']  = v_longitud;
-	
-	iniciar_mapa(v_coordenadas);
+    //Asuncion - Paraguay.
+    var latitud = -25.2961407;
+    var longitud = -57.6309129;
+
+    // Se crea un array con latitud y longitud.
+    var coordenadas = new Array();
+    coordenadas['latitud'] = latitud;
+    coordenadas['longitud']  = longitud;
+
+    iniciar_mapa(coordenadas);
 }
 
 //
@@ -92,42 +92,15 @@ function iniciar_mapa(p_coordenadas){
     switch(accion){
         case 'listar':
             // Crear mapa.
-            mapa = new Mapa('', p_coordenadas, 10);
+            mapa = new Mapa('listar', p_coordenadas, 10);
 
             mapa.obtener_eventos();
             break;
-        case 'marcar':
+        case 'agregar':
             // Crear mapa.
-            mapa = new Mapa('', p_coordenadas, 10);
+            mapa = new Mapa('agregar', p_coordenadas, 10);
             break;
     }
-}
-
-//
-function direccion_buscador() {
-    var entrada = document.getElementById("direccion");
-
-    $.getJSON('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + entrada.value, function(p_data) {
-        var array_items = [];
-
-        $.each(p_data, function(key, val) {
-            var bb = val.boundingbox;
-            //console.log('val: ', val);
-            
-            array_items.push("<li><a href='#' onclick='elegirDireccion(" + bb[0] + ", " + bb[2] + ", " + bb[1] + ", " + bb[3] + ", \"" + val.osm_type + "\");return false;'>" + val.display_name + '</a></li>');
-        });
-
-        $('#resultado').empty();
-        if (array_items.length != 0) {
-            $('<p>', { html: "Resultados de la b&uacute;queda:" }).appendTo('#resultado');
-            $('<ul/>', {
-                'class': 'my-new-list',
-                html: array_items.join('')
-            }).appendTo('#resultado');
-        }else{
-             $('<p>', { html: "Ningun resultado encontrado." }).appendTo('#resultado');
-        }
-    });
 }
 
 //
