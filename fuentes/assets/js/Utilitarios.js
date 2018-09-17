@@ -1,5 +1,5 @@
-var v_mapa = null;
-var v_accion = null;
+var mapa = null;
+var accion = null;
 
 /**
  * @method localizame
@@ -7,7 +7,7 @@ var v_accion = null;
  * @returns void
  */
 function localizame(p_accion){
-	v_accion = p_accion;
+	accion = p_accion;
 	
 	/**
 	 * OBS:
@@ -15,11 +15,11 @@ function localizame(p_accion){
 	 * - Mozilla Firefox en Windows si funciona la GeoLocaclizacion del html5.
 	 */
 	if(navigator.geolocation){
-   	 	navigator.geolocation.getCurrentPosition(obtenerCoordenadas, errores, {
-   	 		enableHighAccuracy: true, 
-   	 		maximumAge: 30000, 
-   	 		timeout: 27000
-   	 	});
+            navigator.geolocation.getCurrentPosition(obtenerCoordenadas, errores, {
+                enableHighAccuracy: true, 
+                maximumAge: 30000, 
+                timeout: 27000
+            });
     }else{
     	 // La latitud y longitud usa los valores por defecto que se definieron en las
     	 // variables globales.
@@ -35,12 +35,12 @@ function localizame(p_accion){
  * @returns void
  */
 function obtenerCoordenadas(p_position){
-	// Se crea un array con latitud y longitud.
-	var v_coordenadas = new Array();
-	v_coordenadas['latitud'] = p_position.coords.latitude;
-	v_coordenadas['longitud']  = p_position.coords.longitude;
-	
-	iniciar_mapa(v_coordenadas);
+    // Se crea un array con latitud y longitud.
+    var coordenadas = new Array();
+    coordenadas['latitud'] = p_position.coords.latitude;
+    coordenadas['longitud']  = p_position.coords.longitude;
+
+    iniciar_mapa(coordenadas);
 }
 
 /**
@@ -66,7 +66,7 @@ function errores(error){
     		break;
     }
     */
-	posicionPorDefecto();
+    posicionPorDefecto();
 }	
 
 /**
@@ -89,40 +89,40 @@ function posicionPorDefecto(){
 
 //
 function iniciar_mapa(p_coordenadas){
-	switch(v_accion){
-	    case 'listar':
-	    	// Crear Mapa.
-	    	v_mapa = new Mapa('', p_coordenadas, 10);
-	    	
-	        v_mapa.obtener_eventos();
-	    	break;
-	    case 'marcar':
-	    	// Crear Mapa.
-	    	v_mapa = new Mapa('', p_coordenadas, 10);
-	    	break;
-	}
+    switch(accion){
+        case 'listar':
+            // Crear mapa.
+            mapa = new Mapa('', p_coordenadas, 10);
+
+            mapa.obtener_eventos();
+            break;
+        case 'marcar':
+            // Crear mapa.
+            mapa = new Mapa('', p_coordenadas, 10);
+            break;
+    }
 }
 
 //
 function direccion_buscador() {
-    var v_entrada = document.getElementById("direccion");
+    var entrada = document.getElementById("direccion");
 
-    $.getJSON('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + v_entrada.value, function(p_data) {
-        var v_array_items = [];
+    $.getJSON('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + entrada.value, function(p_data) {
+        var array_items = [];
 
         $.each(p_data, function(key, val) {
-            bb = val.boundingbox;
-            console.log('val: ', val);
+            var bb = val.boundingbox;
+            //console.log('val: ', val);
             
-            v_array_items.push("<li><a href='#' onclick='elegirDireccion(" + bb[0] + ", " + bb[2] + ", " + bb[1] + ", " + bb[3] + ", \"" + val.osm_type + "\");return false;'>" + val.display_name + '</a></li>');
+            array_items.push("<li><a href='#' onclick='elegirDireccion(" + bb[0] + ", " + bb[2] + ", " + bb[1] + ", " + bb[3] + ", \"" + val.osm_type + "\");return false;'>" + val.display_name + '</a></li>');
         });
 
         $('#resultado').empty();
-        if (v_array_items.length != 0) {
+        if (array_items.length != 0) {
             $('<p>', { html: "Resultados de la b&uacute;queda:" }).appendTo('#resultado');
             $('<ul/>', {
                 'class': 'my-new-list',
-                html: v_array_items.join('')
+                html: array_items.join('')
             }).appendTo('#resultado');
         }else{
              $('<p>', { html: "Ningun resultado encontrado." }).appendTo('#resultado');
@@ -132,5 +132,5 @@ function direccion_buscador() {
 
 //
 function elegirDireccion(p_lat1, p_lng1, p_lat2, p_lng2, p_tipo_osm) {
-    v_mapa.marcar(p_lat1, p_lng1, p_lat2, p_lng2, p_tipo_osm);
+    mapa.marcar(p_lat1, p_lng1, p_lat2, p_lng2, p_tipo_osm);
 }

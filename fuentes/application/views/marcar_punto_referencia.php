@@ -16,31 +16,31 @@
         <br>
     </div>
     <div class="container">
-        <form role="form" action="eventos/agregarEvento" method='post'>
+        <form role="form" action="<?php echo base_url();?>puntos/agregarPunto" method='post'>
             <div class="form-group">
                 <label>Nombre
                     <span>*</span>
                 </label>
-                <input class="form-control" type="text" placeholder="Ingresa aqui el nombre del evento" name="evento_nombre" value="" id="evento_nombre" size="25" />
+                <input class="form-control" type="text" placeholder="Ingresa aqui el nombre del punto de referencia" name="punto_nombre" value="" id="punto_nombre" size="25" />
             </div>
             <div class="form-group">
                 <label>Descripci&oacute;n
                     <span>*</span>
                 </label>
 
-                <input class="form-control" type="text" placeholder="Descripci&oacute;n del punto de referencia" name="evento_lugar" value="" id="evento_lugar" size="25" />
+                <input class="form-control" type="text" placeholder="Descripci&oacute;n del punto de referencia" name="punto_descripcion" value="" id="punto_descripcion" size="25" />
             </div>
             <div class="form-group">
                 <label>Latitud
                     <span>*</span>
                 </label>
-                <input class="form-control" type="text" name="evento_latitud" id="evento_latitud" value="" placeholder="click en el Mapa"/>
+                <input class="form-control" type="text" name="punto_latitud" id="punto_latitud" value="" placeholder="click en el mapa"/>
             </div>
             <div class="form-group">
                 <label>Longitud
                     <span>*</span>
                 </label>
-                <input class="form-control" type="text" name="evento_longitud" id="evento_longitud" value="" placeholder="click en el Mapa"/>
+                <input class="form-control" type="text" name="punto_longitud" id="punto_longitud" value="" placeholder="click en el mapa"/>
             </div>
             <input class="btn btn-primary" type="submit" name="submit" value="Enviar" />
        </form>
@@ -62,7 +62,7 @@
             <div class="form-group">
                 <input class="form-control" type="text" placeholder="Ingresa aqui tu busqueda" name="direccion" value="" id="direccion" size="25" />
             </div>
-<!--            <button class="btn btn-default" type="button" onclick="direccion_buscador();">Buscador</button>-->
+            <button class="btn btn-default" type="button" onclick="direccion_buscador();">Buscador</button>
             <div id="resultado"/>
         </form>
     </div>

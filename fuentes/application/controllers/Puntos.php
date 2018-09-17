@@ -30,7 +30,7 @@ class Puntos extends CI_Controller {
      *
      */
     public function listarPuntos_jsonp(){
-        $r = $this->puntos->listarPuntos();
+        $r = $this->puntos->listar_puntos();
         $v_geojson = $this->listar_puntos($r);
         if(isset($_GET['callback'])){
             header("Content-Type: application/json");
@@ -71,30 +71,26 @@ class Puntos extends CI_Controller {
     }
 
     /**
-     *
+     * Metodo publico que agrega un punto.
      */
-    public function agregarEvento(){
-        $p_evento_nombre = $this->input->post('evento_nombre', true);
-        $p_evento_lugar = $this->input->post('evento_lugar', true);
-        $p_evento_fecha_inicio = $this->input->post('evento_fecha_inicio', true);
-        $p_evento_fecha_fin = $this->input->post('evento_fecha_fin', true);
-        $p_evento_latitud = $this->input->post('evento_latitud', true);
-        $p_evento_longitud = $this->input->post('evento_longitud', true);
+    public function agregarPunto(){
+        $p_punto_nombre = $this->input->post('punto_nombre', true);
+        $p_punto_descripcion = $this->input->post('punto_descripcion', true);
+        $p_punto_latitud = $this->input->post('punto_latitud', true);
+        $p_punto_longitud = $this->input->post('punto_longitud', true);
 
         $v_datos = array(
-            'evento_nombre' => $p_evento_nombre,
-            'evento_lugar' => $p_evento_lugar,
-            'evento_fecha_inicio' => $p_evento_fecha_inicio,
-            'evento_fecha_fin' => $p_evento_fecha_fin,
-            'evento_latitud' => $p_evento_latitud,
-            'evento_longitud' => $p_evento_longitud
+            'punto_nombre' => $p_punto_nombre,
+            'punto_descripcion' => $p_punto_descripcion,
+            'punto_latitud' => $p_punto_latitud,
+            'punto_longitud' => $p_punto_longitud
         );
 
-        if($this->eventos->insertarEvento($v_datos)){
+        if($this->puntos->insertar_punto($v_datos)){
             echo "Inserto correctamente.";
         }else{
              echo "No inserto correctamente.";
         }
     }
 }
-/* End of file eventos.php */
+/* End of file Puntos.php */

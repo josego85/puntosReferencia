@@ -13,7 +13,7 @@ class Puntos_m extends CI_Model {
      * Metodo publico que trae todos los puntos.
      * @return unknown
      */
-    public function listarPuntos(){
+    public function listar_puntos(){
     	$consulta = $this->db->get('puntos');
     	return $consulta;
     }
@@ -32,7 +32,7 @@ class Puntos_m extends CI_Model {
      * @param Array $p_datos
      * @return boolean
      */
-    public function insertarPunto($p_datos){
+    public function insertar_punto($p_datos){
     	if($this->db->insert('puntos', $p_datos)){
             return $this->db->insert_id();
     	}
@@ -40,4 +40,4 @@ class Puntos_m extends CI_Model {
     	
     }
 }
-/* End of eventos_m.php */
+/* End of Puntos_m.php */
