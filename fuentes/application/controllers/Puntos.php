@@ -19,16 +19,6 @@ class Puntos extends CI_Controller {
     /**
      *
      */
-    public function listarEventos(){
-        $r = $this->eventos->listarEventos();
-        $v_geojson = $this->listar_eventos($r);
-        header("Content-Type:application/json", true);
-        echo json_encode($v_geojson);
-    }
-
-    /**
-     *
-     */
     public function listarPuntos_jsonp(){
         $r = $this->puntos->listar_puntos();
         $v_geojson = $this->listar_puntos($r);

@@ -19,15 +19,6 @@ class Puntos_m extends CI_Model {
     }
     
     /**
-     * Metodo publico que recupera la cantidad de filas (reales si se uso sql_calc_found_rows)
-     * de la ultima consulta que se haya ejecutado.
-     * @return integer
-     */
-    public function get_cantidad_resultados(){
-    	return $this->db->query('select FOUND_ROWS() as found_rows')->row()->found_rows;
-    }
-    
-    /**
      * 
      * @param Array $p_datos
      * @return boolean
@@ -38,6 +29,15 @@ class Puntos_m extends CI_Model {
     	}
     	return false;
     	
+    }
+    
+    /**
+     * Metodo publico que recupera la cantidad de filas (reales si se uso sql_calc_found_rows)
+     * de la ultima consulta que se haya ejecutado.
+     * @return integer
+     */
+    public function get_cantidad_resultados(){
+    	return $this->db->query('select FOUND_ROWS() as found_rows')->row()->found_rows;
     }
 }
 /* End of Puntos_m.php */
