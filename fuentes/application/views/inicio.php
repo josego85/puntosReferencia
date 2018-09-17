@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Eventos</title>
+    <title>Puntos de Referencia</title>
     
     <!-- Cabecera -->
     <?php $this->load->view('comunes/cabecera')?>
@@ -18,7 +19,7 @@
         <div class="jumbotron">
             <div class="container">
                 <p>
-                    Puntos de Referencia!!!
+                    Se muestran todos los puntos de referencia!!!
                 </p>
             </div>
         </div>

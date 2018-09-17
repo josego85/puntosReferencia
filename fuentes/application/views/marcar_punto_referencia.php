@@ -1,13 +1,14 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Marcar Evento</title>
+    <title>Puntos de Referencia</title>
     
     <!-- Cabecera -->
     <?php $this->load->view('comunes/cabecera')?>
 </head>
 <body>
     <div class="container cabecera">
-        <h1>Marcar Evento</h1>
+        <h1>Marcar Punto de Referencia</h1>
     </div>
     <div class="container">
         <!-- Menu -->
@@ -23,21 +24,11 @@
                 <input class="form-control" type="text" placeholder="Ingresa aqui el nombre del evento" name="evento_nombre" value="" id="evento_nombre" size="25" />
             </div>
             <div class="form-group">
-                <label>Lugar
+                <label>Descripci&oacute;n
                     <span>*</span>
                 </label>
 
-                <input class="form-control" type="text" placeholder="Ingresa aqui el lugar del evento" name="evento_lugar" value="" id="evento_lugar" size="25" />
-            </div>
-            <div class="form-group">
-                 <label>Fecha inicio
-                 </label>
-                 <input class="form-control" type="text" name="evento_fecha_inicio" value="" id="evento_fecha_inicio" />
-            </div>
-            <div class="form-group">
-               <label>Fecha fin
-               </label>
-               <input class="form-control" type="text" name="evento_fecha_fin" value="" id="evento_fecha_fin"/>
+                <input class="form-control" type="text" placeholder="Descripci&oacute;n del punto de referencia" name="evento_lugar" value="" id="evento_lugar" size="25" />
             </div>
             <div class="form-group">
                 <label>Latitud
@@ -56,14 +47,6 @@
     </div>
     
     <div>
-        <div>
-            <div>
-                <div>
-                    
-               </div>
-           </div>
-       </div>
-
         <!-- Element: Map -->
         <div class='col col-50'>
           <div id='map'></div>
@@ -79,7 +62,7 @@
             <div class="form-group">
                 <input class="form-control" type="text" placeholder="Ingresa aqui tu busqueda" name="direccion" value="" id="direccion" size="25" />
             </div>
-            <button class="btn btn-default" type="button" onclick="direccion_buscador();">Buscador</button>
+<!--            <button class="btn btn-default" type="button" onclick="direccion_buscador();">Buscador</button>-->
             <div id="resultado"/>
         </form>
     </div>

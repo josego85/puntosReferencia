@@ -1,34 +1,6 @@
 var v_mapa = null;
 var v_accion = null;
 
-/*
- * Funcion que se obtiene la fecha actual.
- * 
- */
-function obtenerFechaActual(p_modo_fecha){
-	// Obtener fecha actual.
-    var v_fecha_actual = new Date();
-	var v_dia = v_fecha_actual.getDate();
-	var v_mes = v_fecha_actual.getMonth() + 1;
-	var v_anhio = v_fecha_actual.getFullYear();
-	//var v_hora = v_fecha_actual.getHours();
-	//var v_minutos = v_fecha_actual.getMinutes();
-	v_mes = (v_mes > 9) ? v_mes : '0' + v_mes;
-	v_dia = (v_dia > 9) ? v_dia : '0' + v_dia;
-	//v_minutos = (v_minutos > 9) ? v_minutos : '0' + v_minutos;
-	switch(p_modo_fecha){
-	    case "d-m-Y":
-	    	//var v_fecha_actual_string = v_dia + "-" + v_mes + "-" + v_anhio + " " + v_hora + ":" + v_minutos;
-	    	var v_fecha_actual_string = v_dia + "-" + v_mes + "-" + v_anhio;
-	        break;
-	    case "Y-m-d":
-	    	//var v_fecha_actual_string = v_anhio + "-" + v_mes + "-" + v_dia + " " + v_hora + ":" + v_minutos;
-	    	var v_fecha_actual_string = v_anhio + "-" + v_mes + "-" + v_dia;
-	        break;
-	}
-	return v_fecha_actual_string;
-}
-
 /**
  * @method localizame
  * GeoLocalizacion por html5.
@@ -129,11 +101,6 @@ function iniciar_mapa(p_coordenadas){
 	    	v_mapa = new Mapa('', p_coordenadas, 10);
 	    	break;
 	}
-}
-
-//
-function filtrar(){
-	v_mapa.filtrar_eventos();
 }
 
 //
