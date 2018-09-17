@@ -56,7 +56,12 @@
             </div>
             <!-- form-group -->
             
-            <input class="btn btn-primary" type="submit" name="submit" value="Agregar" />
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <input class="btn btn-primary" type="submit" name="submit" value="Agregar" />
+                </div>
+            </div>
+            <!-- form-group -->
        </form>
     </div>
 </body>
